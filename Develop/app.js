@@ -10,6 +10,69 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+function StartBullshit() {
+    return inquirer 
+    .prompt([
+    {
+        type: "list",
+        name: "whichEmployee",
+        message: "Which type of Employee would you like to add?",
+        choices: ['Manager',  new inquirer.Separator(), 'Engineer',  new inquirer.Separator(), 'Intnern']
+    }
+    
+    ])
+    .then(val => {
+        if (val.whichEmployee === 'Engineer') {
+          newEngineer();
+        }
+      });
+};
+
+function newEngineer() {
+    return inquirer 
+    .prompt([
+    {
+        type: "input",
+        name: "employeeName",
+        message: "Name:",
+     },
+     {
+        type: "input",
+        name: "employeeID",
+        message: "Employee ID:",
+     },
+     {
+        type: "input",
+        name: "employeeEmail",
+        message: "Email adress:",
+     },
+     {
+        type: "input",
+        name: "employeeGithub",
+        message: "Gitbub username:",
+     },
+     {
+        type: "confirm",
+        name: "choice",
+        message: "Would you like to add another employee?"
+      }
+    ])
+    .then(val => {
+        // If the user says yes to another run code again,  otherwise end
+        if (val.choice) {
+         StartBullshit()
+        } else {
+          quit();
+        }
+      });
+};
+
+function quit() {
+    console.log("\nGenerating your HTML file\n");
+    process.exit(0);
+  }
+
+StartBullshit()
 
 // Write code to use inquirer to gather information about the development team members,
 // and to create objects for each team member (using the correct classes as blueprints!)
