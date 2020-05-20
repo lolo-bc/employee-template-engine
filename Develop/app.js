@@ -10,9 +10,11 @@ const outputPath = path.join(OUTPUT_DIR, "team.html");
 
 const render = require("./lib/htmlRenderer");
 
+//array to hold all the info user inputs before rendering
 const allEmployees = [];
 
-async function addNewEmployee() {
+//main menu which promts for employee type
+ function addNewEmployee() {
     return inquirer 
     .prompt([
     {
@@ -29,14 +31,16 @@ async function addNewEmployee() {
         } else if (val.whichEmployee === 'Intern') {
          newIntern()
        } else if (val.whichEmployee === 'Manager') {
-           newManager();
+          newManager();
         } else {
          makeHTML();
         }
       });
 };
 
-async function newManager() {
+
+//question prompts if manager is chosen
+ function newManager() {
   return inquirer 
   .prompt([
   {
@@ -67,7 +71,7 @@ async function newManager() {
   ])
   
   .then(val => {
-      const manager = new Manager(val.name, val.employeeID, val.employeeID, val.officeNumber);
+      const manager = new Manager(val.employeeName, val.employeeID, val.employeeEmail, val.officeNumber);
       allEmployees.push(manager);
       // If the user says yes to another run code again,  otherwise end
       if (val.choice) {
@@ -79,7 +83,8 @@ async function newManager() {
 };
 
 
-async function newEngineer() {
+//question prompts in engineer type is chosen 
+ function newEngineer() {
     return inquirer 
     .prompt([
     {
@@ -109,7 +114,7 @@ async function newEngineer() {
       }
     ])
     .then(val => {
-       engineer = new Engineer(val.name, val.employeeID, val.employeeID, val.github);
+       engineer = new Engineer(val.employeeName, val.employeeID, val.employeeEmail, val.github);
         allEmployees.push(engineer);
         // If the user says yes to another run code again,  otherwise end
         if (val.choice) {
@@ -120,7 +125,8 @@ async function newEngineer() {
       });
 };
 
-async function newIntern() {
+//question prompts if intern is chosen
+ function newIntern() {
   return inquirer 
   .prompt([
   {
@@ -150,9 +156,8 @@ async function newIntern() {
     }
   ])
   .then(val => {
-      intern = new Intern(val.name, val.employeeID, val.employeeID, val.school);
+      intern = new Intern(val.employeeName, val.employeeID, val.employeeEmail, val.school);
       allEmployees.push(intern);
-      // If the user says yes to another run code again,  otherwise end
       if (val.choice) {
        addNewEmployee()
       } else {
@@ -161,8 +166,8 @@ async function newIntern() {
     });
 };
 
-
-async function makeHTML() {
+//render fucntion once all employees are added 
+function makeHTML() {
     fs.writeFileSync(outputPath, render(allEmployees), "utf-8")
     console.log("\nGenerating your HTML file\n");
     process.exit(0);

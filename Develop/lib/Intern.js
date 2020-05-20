@@ -1,17 +1,18 @@
-// TODO: Write code to define and export the Intern class.  HINT: This class should inherit from Employee.
+//this class extends employee and adds info unique to intern types
+
+
 const Employee = require("../lib/Employee.js");
 
 
 class Intern extends Employee{
 
     
-    constructor(school, name, id, email) {
-        super(name, id, email);
+    constructor(name, id, email, school) {
+        super(name, id, email, "Intern");
         this.school = school
-        this.role = "Intern"
     };
    
-    getGithub() {
+    getSchool() {
         return this.school
     };
 }

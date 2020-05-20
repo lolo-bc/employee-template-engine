@@ -1,19 +1,19 @@
-// TODO: Write code to define and export the Employee class
+//This class is used for each type of employee to gather basic information 
 
 class Employee {
-    constructor(name, role, email, id) {
+    constructor(name, email, id, role) {
         this.name = name;
-        this.role = role;
-        this.email = email
-        this.id = id
-    };
-  
-    getName(){
-        return this.name
+        this.email = email;
+        this.id = id;
+        this.role = role
     };
 
     getRole(){
         return this.role
+    };
+  
+    getName(){
+        return this.name
     };
 
     getEmail() {
