@@ -1,15 +1,11 @@
 //This class is used for each type of employee to gather basic information 
 
 class Employee {
-    constructor(name, email, id, role) {
+    constructor(name, id, email, role) {
         this.name = name;
-        this.email = email;
         this.id = id;
-        this.role = role
-    };
-
-    getRole(){
-        return this.role
+        this.email = email;
+        this.role = role || "Employee"
     };
   
     getName(){
@@ -22,6 +18,10 @@ class Employee {
 
     getId(){
         return this.id
+    };
+
+    getRole(){
+        return this.role
     };
 
 }
